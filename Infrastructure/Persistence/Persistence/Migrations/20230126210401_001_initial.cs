@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class _001initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -65,20 +65,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Payments",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RentalId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PaymentMethod = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Amount = table.Column<float>(type: "real", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Payments", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Transmissions",
                 columns: table => new
                 {
@@ -116,7 +102,7 @@ namespace Persistence.Migrations
                     BrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BodyTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TransmissionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Year = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false),
                     Mileage = table.Column<int>(type: "int", nullable: false),
                     SeatCount = table.Column<int>(type: "int", nullable: false),
                     HorsePower = table.Column<int>(type: "int", nullable: false),
@@ -178,6 +164,26 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Payments",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RentalId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PaymentMethod = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Amount = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Payments_Rentals_RentalId",
+                        column: x => x.RentalId,
+                        principalTable: "Rentals",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_CarInventories_LocationId",
                 table: "CarInventories",
@@ -202,6 +208,11 @@ namespace Persistence.Migrations
                 name: "IX_Cars_TransmissionId",
                 table: "Cars",
                 column: "TransmissionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Payments_RentalId",
+                table: "Payments",
+                column: "RentalId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rentals_CarId",

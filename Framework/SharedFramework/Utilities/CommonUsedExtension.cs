@@ -1,4 +1,4 @@
-﻿using SharedFramework.Dtos.Pagination;
+﻿using SharedFramework.Dtos.Request;
 
 namespace SharedFramework.Utilities
 {

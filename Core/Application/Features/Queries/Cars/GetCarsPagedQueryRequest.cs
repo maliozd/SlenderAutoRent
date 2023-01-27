@@ -1,11 +1,11 @@
-﻿using Domain.Entities;
+﻿using Application.Features.Queries.Cars.Dtos;
 using MediatR;
-using SharedFramework.Dtos.Pagination;
+using SharedFramework.Dtos.Request;
 using SharedFramework.Dtos.Response.QueryResponse;
 
-namespace Application.Features.Queries.Cars
+namespace Application.Features.Queries.Car
 {
-    public class GetCarsPagedQueryRequest : PaginationRequest, IRequest<PaginationQueryResponse<ICollection<Car>>>
+    public class GetCarsPagedQueryRequest : PaginationRequest, IRequest<PaginationQueryResponse<ICollection<CarDto>>>
     {
 
     }

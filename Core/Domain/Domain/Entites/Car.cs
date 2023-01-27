@@ -11,7 +11,8 @@ public partial class Car : BaseEntity
 
     public Guid TransmissionId { get; set; }
 
-    public DateTime Year { get; set; }
+    public Guid? CarInventoryId { get; set; }
+    public int Year { get; set; }
 
     public int Mileage { get; set; }
 
@@ -21,7 +22,6 @@ public partial class Car : BaseEntity
 
     public string Color { get; set; } = null!;
 
-    public Guid? CarInventoryId { get; set; }
 
     public virtual BodyType BodyType { get; set; } = null!;
 

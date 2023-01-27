@@ -2,13 +2,11 @@
 
 namespace Domain.Entites.Base
 {
-    public abstract class BaseEntity<TKey>
+    public abstract class BaseEntity
     {
         [Key]
-        public TKey Id { get; set; }
+        public Guid Id { get; set; }
     }
 
-    public abstract class BaseEntity : BaseEntity<Guid>
-    {
-    }
+
 }

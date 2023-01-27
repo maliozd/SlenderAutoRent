@@ -1,16 +1,15 @@
-﻿using SharedFramework.Dtos.Pagination;
+﻿using SharedFramework.Dtos.Request;
 
 namespace SharedFramework.Dtos.Response.QueryResponse
 {
-    public class PaginationQueryResponse<TKey>
+    public class PaginationQueryResponse<TKey> : QueryResponse<TKey>
     {
         public PaginationQueryResponse(TKey data, int total, PaginationRequest request)
         {
-            Data = data;
+            this.Data = data;
             Meta = new(request.Page, total, request.PerPage);
         }
 
-        public TKey Data { get; set; }
         public PaginationMeta Meta { get; set; }
 
     }

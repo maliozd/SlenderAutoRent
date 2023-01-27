@@ -12,8 +12,8 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230125152638_002_payment")]
-    partial class _002payment
+    [Migration("20230126210401_001_initial")]
+    partial class _001initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,8 +83,8 @@ namespace Persistence.Migrations
                     b.Property<Guid>("TransmissionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Year")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

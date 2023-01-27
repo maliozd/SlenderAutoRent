@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Context;
 using Persistence.Repositories;
+using Persistence.Seeder;
 
 namespace Persistence
 {
@@ -11,6 +12,8 @@ namespace Persistence
     {
         public static void AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
+
+
             services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("Default")));
 
             services.AddScoped<ICarRepository, CarRepository>();
@@ -22,6 +25,10 @@ namespace Persistence
             services.AddScoped<IPaymentRepository, PaymentRepository>();
             services.AddScoped<ICarInventoryRepository, CarInventoryRepository>();
             services.AddScoped<ILocationRepository, LocationRepository>();
+
+            DataSeeder.Seed(services.BuildServiceProvider());
+
+
         }
     }
 }

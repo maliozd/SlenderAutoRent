@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Features.Commands.Cars;
+using Application.Features.Queries.Car;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,24 +11,37 @@ namespace API.Controllers
     [ApiController]
     public class CarController : ControllerBase
     {
-        // GET: api/<CarController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        readonly IMediator _mediator;
+
+        public CarController(IMediator mediator)
         {
-            return new string[] { "value1", "value2" };
+            _mediator = mediator;
+        }
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+
+            return Ok();
         }
 
-        // GET api/<CarController>/5
+        [HttpGet("GetPaged")]
+        public async Task<IActionResult> GetPaged([FromQuery] GetCarsPagedQueryRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<CarController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] CreateCarCommandRequest request)
         {
+            var response = await _mediator.Send(request);
+            return Ok(response);
         }
 
         // PUT api/<CarController>/5

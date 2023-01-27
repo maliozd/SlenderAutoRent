@@ -80,8 +80,8 @@ namespace Persistence.Migrations
                     b.Property<Guid>("TransmissionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Year")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

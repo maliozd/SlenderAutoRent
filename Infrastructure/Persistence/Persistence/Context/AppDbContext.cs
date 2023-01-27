@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.Entites.Base;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Context;
@@ -33,6 +34,21 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<Transmission> Transmissions { get; set; }
 
 
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        var entities = ChangeTracker.Entries<BaseEntity>();
+        foreach (var entity in entities)
+        {
+            switch (entity.State)
+            {
+                case EntityState.Added:
+                    entity.Entity.Id = Guid.NewGuid();
+                    break;
+
+            }
+        }
+        return base.SaveChangesAsync(cancellationToken);
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
