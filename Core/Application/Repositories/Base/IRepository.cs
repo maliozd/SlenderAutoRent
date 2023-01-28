@@ -10,9 +10,9 @@ namespace Application.Repositories.Base
         Task<ICollection<T>> GetMultipleByFilter(Expression<Func<T, bool>> expression);
         Task<T> GetOneByFilter(Expression<Func<T, bool>> expression);
         IQueryable<T> GetAll();
-        Task<T> GetByIdAsync(Guid id);
+        Task<T> GetByIdAsync(int id);
         Task<bool> AddAsync(T entity);
-        Task<bool> DeleteByIdAsync(Guid id);
+        Task<bool> DeleteByIdAsync(int id);
         bool Delete(T entity);
         bool Update(T entity);
         Task<int> SaveAsync();

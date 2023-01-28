@@ -29,7 +29,7 @@ namespace Persistence.Repositories.Base
             return entityEntry.State == EntityState.Deleted;
         }
 
-        public async Task<bool> DeleteByIdAsync(Guid id)
+        public async Task<bool> DeleteByIdAsync(int id)
         {
             T entityToDelete = await Table.Where(x => x.Id == id).FirstOrDefaultAsync();
             if (entityToDelete != null)
@@ -45,7 +45,7 @@ namespace Persistence.Repositories.Base
             return Table.AsQueryable();
         }
 
-        public async Task<T> GetByIdAsync(Guid id)
+        public async Task<T> GetByIdAsync(int id)
         {
             var data = await Table.FindAsync(id);
             if (data != null)

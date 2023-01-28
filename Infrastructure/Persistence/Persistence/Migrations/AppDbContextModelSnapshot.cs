@@ -24,8 +24,8 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.BodyType", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -33,13 +33,13 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BodyTypes");
+                    b.ToTable("BodyTypes", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Brand", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -47,22 +47,25 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.ToTable("Brands", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Car", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("BodyTypeId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("BodyTypeId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("BrandId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid?>("CarInventoryId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("CarInventoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CarState")
+                        .HasColumnType("int");
 
                     b.Property<string>("Color")
                         .IsRequired()
@@ -77,8 +80,8 @@ namespace Persistence.Migrations
                     b.Property<int>("SeatCount")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("TransmissionId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("TransmissionId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");
@@ -93,28 +96,28 @@ namespace Persistence.Migrations
 
                     b.HasIndex(new[] { "TransmissionId" }, "IX_Cars_TransmissionId");
 
-                    b.ToTable("Cars");
+                    b.ToTable("Cars", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.CarInventory", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("LocationId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex(new[] { "LocationId" }, "IX_CarInventories_LocationId");
 
-                    b.ToTable("CarInventories");
+                    b.ToTable("CarInventories", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Customer", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -137,13 +140,13 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Location", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -155,13 +158,13 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Locations");
+                    b.ToTable("Locations", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Payment", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<float>("Amount")
                         .HasColumnType("real");
@@ -170,26 +173,26 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("RentalId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("RentalId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RentalId");
 
-                    b.ToTable("Payments");
+                    b.ToTable("Payments", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Rental", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("CarId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("CustomerId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("PickUpDate")
                         .HasColumnType("datetime2");
@@ -203,13 +206,13 @@ namespace Persistence.Migrations
 
                     b.HasIndex(new[] { "CustomerId" }, "IX_Rentals_CustomerId");
 
-                    b.ToTable("Rentals");
+                    b.ToTable("Rentals", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Transmission", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -217,7 +220,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Transmissions");
+                    b.ToTable("Transmissions", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Car", b =>

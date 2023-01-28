@@ -24,7 +24,7 @@ namespace Persistence.Seeder
                 {
                     new()
                     {
-                        Id = Guid.NewGuid(),
+                        Id = 1,
                         Address = "İstanbul",
                         Email = "ahmetgunduz@gmail.com",
                         Name = "Ahmet Gündüz",
@@ -32,7 +32,7 @@ namespace Persistence.Seeder
                         RegistrationDate = DateTime.Now
                     },
                     new() {
-                        Id = Guid.NewGuid(),
+                        Id = 2,
                         Address = "Ankara",
                         Email = "ayselisik@gmail.com",
                         Name = "Aysel Işık",
@@ -50,31 +50,31 @@ namespace Persistence.Seeder
                 {
                     new()
                     {
-                        Id = Guid.NewGuid(),
+                        Id = 1,
                         Address = "Sabiha Gökçen Airport",
                         City = "Istanbul"
                     },
                     new()
                     {
-                        Id = Guid.NewGuid(),
+                        Id = 2,
                         Address ="Atatürk Airport",
                         City = "Istanbul"
                     },
                     new()
                     {
-                        Id = Guid.NewGuid(),
+                        Id = 3,
                         Address = "Kizilay Square",
                         City = "Ankara"
                     },
                     new()
                     {
-                        Id = Guid.NewGuid(),
+                        Id = 4,
                         Address = "Konak",
                         City = "İzmir"
                     },
                     new()
                     {
-                        Id = Guid.NewGuid(),
+                        Id = 5,
                         Address = "Sakarya Bus Station",
                         City = "Sakarya"
                     }

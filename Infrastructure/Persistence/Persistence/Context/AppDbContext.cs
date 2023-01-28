@@ -1,6 +1,7 @@
 ﻿using Domain.Entites.Base;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Persistence.Configuration;
 
 namespace Persistence.Context;
 
@@ -33,6 +34,13 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Transmission> Transmissions { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer(ConnectionString.MssqlLocalDb,
+            options => options.EnableRetryOnFailure());
+
+        base.OnConfiguring(optionsBuilder);
+    }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
@@ -42,7 +50,6 @@ public partial class AppDbContext : DbContext
             switch (entity.State)
             {
                 case EntityState.Added:
-                    entity.Entity.Id = Guid.NewGuid();
                     break;
 
             }

@@ -1,17 +1,20 @@
 ﻿using Domain.Entites.Base;
+using Domain.Enums;
 
 namespace Domain.Entities;
 
 public partial class Car : BaseEntity
 {
 
-    public Guid BrandId { get; set; }
+    public int BrandId { get; set; }
 
-    public Guid BodyTypeId { get; set; }
+    public int BodyTypeId { get; set; }
 
-    public Guid TransmissionId { get; set; }
+    public int TransmissionId { get; set; }
 
-    public Guid? CarInventoryId { get; set; }
+    public int? CarInventoryId { get; set; }
+    public CarState CarState { get; set; }
+
     public int Year { get; set; }
 
     public int Mileage { get; set; }

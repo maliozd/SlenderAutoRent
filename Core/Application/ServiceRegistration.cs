@@ -1,6 +1,4 @@
 ﻿using Application.Mappings;
-using Application.Services.Abstract;
-using Application.Services.Concrete;
 using Application.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -17,8 +15,6 @@ namespace Application
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddMediatR(typeof(ServiceRegistration));
             services.AddFluentValidationAutoValidation().AddValidatorsFromAssemblyContaining<CreateCarValidator>(ServiceLifetime.Scoped);
-
-            services.AddScoped<ICarService, CarService>();
         }
     }
 }

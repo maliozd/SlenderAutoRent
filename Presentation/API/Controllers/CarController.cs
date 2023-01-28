@@ -1,5 +1,5 @@
-﻿using Application.Features.Commands.Cars;
-using Application.Features.Queries.Car;
+﻿using Application.Features.Cars.Queries.GetPagedList;
+using Application.Features.Commands.Cars.Create;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -12,7 +12,7 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230126210401_001_initial")]
+    [Migration("20230128150629_001_initial")]
     partial class _001initial
     {
         /// <inheritdoc />
@@ -27,8 +27,8 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.BodyType", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -41,8 +41,8 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Brand", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -55,17 +55,20 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Car", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("BodyTypeId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("BodyTypeId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("BrandId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid?>("CarInventoryId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("CarInventoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CarState")
+                        .HasColumnType("int");
 
                     b.Property<string>("Color")
                         .IsRequired()
@@ -80,8 +83,8 @@ namespace Persistence.Migrations
                     b.Property<int>("SeatCount")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("TransmissionId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("TransmissionId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");
@@ -101,11 +104,11 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.CarInventory", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("LocationId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -116,8 +119,8 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Customer", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -145,8 +148,8 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Location", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -163,8 +166,8 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Payment", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<float>("Amount")
                         .HasColumnType("real");
@@ -173,8 +176,8 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("RentalId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("RentalId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -185,14 +188,14 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Rental", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("CarId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("CustomerId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("PickUpDate")
                         .HasColumnType("datetime2");
@@ -211,8 +214,8 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Transmission", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<string>("Type")
                         .IsRequired()

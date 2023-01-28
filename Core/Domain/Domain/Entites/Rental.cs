@@ -5,9 +5,9 @@ namespace Domain.Entities;
 public partial class Rental : BaseEntity
 {
 
-    public Guid CustomerId { get; set; }
+    public int CustomerId { get; set; }
 
-    public Guid CarId { get; set; }
+    public int CarId { get; set; }
 
     public DateTime PickUpDate { get; set; }
 

@@ -1,4 +1,4 @@
-﻿using Application.Features.Commands.Cars;
+﻿using Application.Features.Commands.Cars.Create;
 using FluentValidation;
 
 namespace Application.Validators

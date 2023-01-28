@@ -1,10 +1,6 @@
-﻿using MediatR;
-using SharedFramework.Abstract.Command;
-using SharedFramework.Dtos.Response.CommandResponse;
-
-namespace Application.Features.Commands.Cars
+﻿namespace Application.Features.Cars.Dtos
 {
-    public class CreateCarCommandRequest : ICommand, IRequest<CommandResponse>
+    public class CarDetailDto
     {
         public string BrandId { get; set; }
         public string BodyTypeId { get; set; }

@@ -5,7 +5,7 @@ namespace Domain.Entities;
 public partial class CarInventory : BaseEntity
 {
 
-    public Guid LocationId { get; set; }
+    public int LocationId { get; set; }
 
     public virtual ICollection<Car> Cars { get; } = new List<Car>();
 
