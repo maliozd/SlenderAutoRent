@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Context;
 
@@ -11,9 +12,11 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230128152620_001_initial")]
+    partial class _001initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,6 +76,9 @@ namespace Persistence.Migrations
                     b.Property<int?>("CarInventoryId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CarState")
+                        .HasColumnType("int");
+
                     b.Property<string>("Color")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -84,9 +90,6 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("SeatCount")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("State")
                         .HasColumnType("int");
 
                     b.Property<int>("TransmissionId")

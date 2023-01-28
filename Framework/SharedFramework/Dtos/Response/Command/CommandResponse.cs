@@ -5,7 +5,12 @@ namespace SharedFramework.Dtos.Response.Command
 {
     public class CommandResponse<T> where T : class
     {
-        public CommandResponse(int affectedRow, bool isSuccess, string message, T affectedData)
+        public CommandResponse(bool isSuccess, string errorMessage)
+        {
+            IsSuccess = isSuccess;
+            Message = errorMessage;
+        }
+        public CommandResponse(bool isSuccess, int affectedRow, string message, T affectedData)
         {
             AffectedRow = affectedRow;
             AffectedData = affectedData;
@@ -26,11 +31,10 @@ namespace SharedFramework.Dtos.Response.Command
             Message = message;
             AffectedData = affectedData;
         }
-
         public bool IsSuccess { get; set; }
+        public string? Message { get; set; }
         public int AffectedRow { get; set; }
         public T? AffectedData { get; set; }
-        public string? Message { get; set; }
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<ErrorModel>? Errors { get; set; }
     }

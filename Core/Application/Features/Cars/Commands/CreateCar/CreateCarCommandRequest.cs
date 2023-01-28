@@ -4,11 +4,11 @@ using SharedFramework.Dtos.Response.Command;
 
 namespace Application.Features.Commands.Cars.Create
 {
-    public class CreateCarCommandRequest : IRequest<CommandResponse<CreatedCarDto>>
+    public class CreateCarCommandRequest : IRequest<CommandResponse<CarDetailDto>>
     {
-        public string BrandId { get; set; }
-        public string BodyTypeId { get; set; }
-        public string TransmissionId { get; set; }
+        public int BrandId { get; set; }
+        public int BodyTypeId { get; set; }
+        public int TransmissionId { get; set; }
         public int Year { get; set; }
         public int Mileage { get; set; }
         public int SeatCount { get; set; }

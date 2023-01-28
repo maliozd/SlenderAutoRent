@@ -1,4 +1,6 @@
-﻿using Application.Features.Cars.Queries.GetPagedList;
+﻿using Application.Features.Cars.Queries.GetAllCars;
+using Application.Features.Cars.Queries.GetCarById;
+using Application.Features.Cars.Queries.GetCarsPaged;
 using Application.Features.Commands.Cars.Create;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,10 +20,10 @@ namespace API.Controllers
             _mediator = mediator;
         }
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] GetAllCarsQueryRequest request)
         {
-
-            return Ok();
+            var response = await _mediator.Send(request);
+            return Ok(response);
         }
 
         [HttpGet("GetPaged")]
@@ -31,10 +33,11 @@ namespace API.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> Get([FromRoute] GetCarByIdQueryRequest request)
         {
-            return "value";
+            var response = await _mediator.Send(request);
+            return Ok(response);
         }
 
         [HttpPost]

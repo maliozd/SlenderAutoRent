@@ -1,7 +1,7 @@
 ﻿using Application.Features.Commands.Cars.Create;
 using FluentValidation;
 
-namespace Application.Validators
+namespace Application.Features.Cars.Validators
 {
     public class CreateCarValidator : AbstractValidator<CreateCarCommandRequest>
     {

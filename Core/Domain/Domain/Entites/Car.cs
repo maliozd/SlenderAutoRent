@@ -13,7 +13,7 @@ public partial class Car : BaseEntity
     public int TransmissionId { get; set; }
 
     public int? CarInventoryId { get; set; }
-    public CarState CarState { get; set; }
+    public CarState? State { get; set; }
 
     public int Year { get; set; }
 
