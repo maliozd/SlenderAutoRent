@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Brands\Commands\" />
+    <Folder Include="Features\Brands\Queries\" />
     <Folder Include="Repositories\Base\" />
   </ItemGroup>
 

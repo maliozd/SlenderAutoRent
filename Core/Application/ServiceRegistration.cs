@@ -12,7 +12,7 @@ namespace Application
 {
     public static class ServiceRegistration
     {
-        public static void AddAplicationServices(this IServiceCollection services)
+        public static void AddApplicationServices(this IServiceCollection services)
         {
             services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseRules));
             services.AddAutoMapper(typeof(MappingProfiles));

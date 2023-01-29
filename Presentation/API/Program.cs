@@ -1,14 +1,18 @@
+using API.LoggerConfigurationHandler;
 using Application;
 using Persistence;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddAplicationServices();
+builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Host.UseSerilog(LoggerConfigurationHandler.GetConfiguratedLogger());
+builder.Services.AddHttpLoggingExtension();
 
 var app = builder.Build();
 

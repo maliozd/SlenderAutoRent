@@ -1,4 +1,5 @@
 ﻿using Application.Features.Cars.Queries.GetAllCars;
+using Application.Features.Cars.Queries.GetAvailableCars;
 using Application.Features.Cars.Queries.GetCarById;
 using Application.Features.Cars.Queries.GetCarsPaged;
 using Application.Features.Commands.Cars.Create;
@@ -35,6 +36,12 @@ namespace API.Controllers
 
         [HttpGet("{Id}")]
         public async Task<IActionResult> Get([FromRoute] GetCarByIdQueryRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAvailableCars([FromRoute] GetAvailableCarsQueryRequest request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);

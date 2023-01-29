@@ -1,5 +1,6 @@
 ﻿using Application.Repositories;
 using Domain.Entities;
+using Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 using Persistence.Repositories.Base;
@@ -15,16 +16,21 @@ namespace Persistence.Repositories
         {
         }
 
+        public IQueryable<Car> SpecsIncludedTable => Table.Include(c => c.BodyType).Include(c => c.Brand).Include(c => c.Transmission);
+        public async Task<ICollection<Car>> GetAvailableCarsAsync()
+        {
+            var availableCars = await SpecsIncludedTable.Where(c => c.State == CarState.Available).ToListAsync();
+            return availableCars;
+        }
         public async Task<Car> GetByIdWithNavigationsAsync(int id)
         {
-            return await Table.Include(c => c.BodyType).Include(c => c.Brand).Include(c => c.Transmission).FirstOrDefaultAsync(x => x.Id == id);
+            return await SpecsIncludedTable.FirstOrDefaultAsync(x => x.Id == id);
         }
-
         public PaginationQueryResponse<ICollection<Car>> GetPaged(PaginationRequest request)
         {
-            var data = Table.Include(c => c.BodyType).Include(c => c.Brand).Include(c => c.Transmission).ToPagedList(request);
-            int total = Table.Count();
-            return new(data, total, request);
+            var cars = SpecsIncludedTable.ToPagedList(request);
+            int totalCars = Table.Count();
+            return new(cars, totalCars, request);
 
         }
     }

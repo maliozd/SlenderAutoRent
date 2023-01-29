@@ -7,7 +7,9 @@ namespace Application.Repositories
 {
     public interface ICarRepository : IRepository<Car>
     {
+        IQueryable<Car> SpecsIncludedTable { get; }
         Task<Car> GetByIdWithNavigationsAsync(int id);
         PaginationQueryResponse<ICollection<Car>> GetPaged(PaginationRequest request);
+        Task<ICollection<Car>> GetAvailableCarsAsync();
     }
 }
