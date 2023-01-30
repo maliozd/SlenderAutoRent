@@ -21,19 +21,23 @@ namespace Application.Features.Cars.Commands.UpdateCar
 
         public async Task<CommandResponse<UpdatedCarDto>> Handle(UpdateCarCommandRequest request, CancellationToken cancellationToken)
         {
-            var car = _mapper.Map<Car>(request);
-            _carRepository.Update(car);
-            var affectedRow = await _carRepository.SaveAsync();
-            if (affectedRow > 0)
+            try
             {
-                var affectedData = _mapper.Map<UpdatedCarDto>(car);
-                return new(true, affectedRow, UpdateCommandMesageConstants.Success, affectedData);
+                _carRepository.Update(_mapper.Map<Car>(request));
+
+                var affectedRow = await _carRepository.SaveAsync();
+                if (affectedRow > 0)
+                {
+                    var updatedCar = await _carRepository.GetByIdWithNavigationsAsync(request.Id);
+                    var affectedData = _mapper.Map<UpdatedCarDto>(updatedCar);
+                    return new(true, affectedRow, UpdateCommandMesageConstants.Success, affectedData);
+                }
+                return new(false, UpdateCommandMesageConstants.Error);
             }
-
-            return new()
-
-
-
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

@@ -21,7 +21,15 @@ namespace Application.Features.Cars.Mapping
                 )).
                 ForMember(c => c.Transmission, m => m.MapFrom(c => c.Transmission.Type != null ? c.Transmission.Type : ""));
 
-            CreateMap<UpdateCarCommandRequest, Car>();
+            CreateMap<UpdateCarCommandRequest, Car>().
+                ForMember(c => c.State, m => m.MapFrom(c => (CarState)c.State));
+
+            CreateMap<Car, UpdatedCarDto>().
+                ForMember(c => c.Brand, m => m.MapFrom(c => c.Brand.Name != null ? c.Brand.Name : "")).
+                ForMember(c => c.BodyType, m => m.MapFrom(c => c.BodyType.Name != null ?
+                c.BodyType.Name : ""
+                )).
+                ForMember(c => c.Transmission, m => m.MapFrom(c => c.Transmission.Type != null ? c.Transmission.Type : ""));
 
 
 

@@ -1,5 +1,5 @@
-﻿using Application.Features.Cars.Validators;
-using Application.Mappings;
+﻿using Application.Features.Cars.Mapping;
+using Application.Features.Cars.Validators;
 using Application.Rules;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -15,7 +15,7 @@ namespace Application
         public static void AddApplicationServices(this IServiceCollection services)
         {
             services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseRules));
-            services.AddAutoMapper(typeof(MappingProfiles));
+            services.AddAutoMapper(typeof(CarMappingProfile));
             services.AddMediatR(typeof(ServiceRegistration));
             services.AddFluentValidationAutoValidation().AddValidatorsFromAssemblyContaining<CreateCarValidator>(ServiceLifetime.Scoped);
         }

@@ -55,7 +55,7 @@ namespace API.Controllers
             return Ok(response);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateCarCommandRequest request)
         {
             var response = await _mediator.Send(request);
@@ -67,5 +67,7 @@ namespace API.Controllers
         public void Delete(int id)
         {
         }
+
+        //TO DO --> ExceptionMiddleware
     }
 }

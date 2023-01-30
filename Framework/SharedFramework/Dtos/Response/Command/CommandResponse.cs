@@ -5,7 +5,11 @@ namespace SharedFramework.Dtos.Response.Command
 {
     public class CommandResponse<T> where T : class
     {
-
+        public CommandResponse(bool isSuccess, string errorMesage)
+        {
+            IsSuccess = isSuccess;
+            Message = errorMesage;
+        }
         public CommandResponse(bool isSuccess, int affectedRow, string message, T affectedData)
         {
             AffectedRow = affectedRow;
