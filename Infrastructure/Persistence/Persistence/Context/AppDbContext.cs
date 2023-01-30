@@ -34,17 +34,12 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Transmission> Transmissions { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlServer(ConnectionString.MssqlLocalDb,
-            options => options.EnableRetryOnFailure());
 
-        base.OnConfiguring(optionsBuilder);
-    }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         var entities = ChangeTracker.Entries<BaseEntity>();
+
         foreach (var entity in entities)
         {
             switch (entity.State)
@@ -55,6 +50,19 @@ public partial class AppDbContext : DbContext
             }
         }
         return base.SaveChangesAsync(cancellationToken);
+    }
+    /// <summary>
+    /// 
+    /// Configuration
+    /// 
+    /// </summary>
+    /// <param name="optionsBuilder"></param>
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer(ConnectionString.MssqlLocalDb,
+            options => options.EnableRetryOnFailure());
+
+        base.OnConfiguring(optionsBuilder);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

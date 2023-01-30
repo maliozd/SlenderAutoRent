@@ -1,4 +1,5 @@
-﻿using Application.Features.Cars.Dtos;
+﻿using Application.Features.Cars.Commands.UpdateCar;
+using Application.Features.Cars.Dtos;
 using Application.Features.Commands.Cars.Create;
 using AutoMapper;
 using Domain.Entities;
@@ -19,6 +20,8 @@ namespace Application.Features.Cars.Mapping
                 c.BodyType.Name : ""
                 )).
                 ForMember(c => c.Transmission, m => m.MapFrom(c => c.Transmission.Type != null ? c.Transmission.Type : ""));
+
+            CreateMap<UpdateCarCommandRequest, Car>();
 
 
 

@@ -40,6 +40,7 @@ namespace Persistence.Repositories.Base
             return false;
         }
 
+        //leaky
         public IQueryable<T> GetAll()
         {
             return Table.AsQueryable();
@@ -76,9 +77,11 @@ namespace Persistence.Repositories.Base
             return await _context.SaveChangesAsync();
         }
 
+
         public bool Update(T entity)
         {
             EntityEntry entry = Table.Update(entity);
+
             return entry.State == EntityState.Modified;
         }
     }

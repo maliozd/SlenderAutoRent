@@ -1,4 +1,5 @@
-﻿using Application.Features.Cars.Queries.GetAllCars;
+﻿using Application.Features.Cars.Commands.UpdateCar;
+using Application.Features.Cars.Queries.GetAllCars;
 using Application.Features.Cars.Queries.GetAvailableCars;
 using Application.Features.Cars.Queries.GetCarById;
 using Application.Features.Cars.Queries.GetCarsPaged;
@@ -54,10 +55,11 @@ namespace API.Controllers
             return Ok(response);
         }
 
-        // PUT api/<CarController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put([FromBody] UpdateCarCommandRequest request)
         {
+            var response = await _mediator.Send(request);
+            return Ok(response);
         }
 
         // DELETE api/<CarController>/5
