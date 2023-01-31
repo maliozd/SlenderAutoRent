@@ -24,7 +24,6 @@ namespace Application.Features.Cars.Commands.UpdateCar
             try
             {
                 _carRepository.Update(_mapper.Map<Car>(request));
-
                 var affectedRow = await _carRepository.SaveAsync();
                 if (affectedRow > 0)
                 {

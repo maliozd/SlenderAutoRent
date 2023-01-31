@@ -4,7 +4,10 @@ namespace Domain.Entities;
 
 public partial class Customer : BaseEntity
 {
-
+    public Customer()
+    {
+        Rentals = new HashSet<Rental>();
+    }
     public string Name { get; set; } = null!;
 
     public string PhoneNumber { get; set; } = null!;
@@ -15,5 +18,6 @@ public partial class Customer : BaseEntity
 
     public string Address { get; set; } = null!;
 
-    public virtual ICollection<Rental> Rentals { get; } = new List<Rental>();
+    public virtual ICollection<Rental> Rentals { get; }
+
 }

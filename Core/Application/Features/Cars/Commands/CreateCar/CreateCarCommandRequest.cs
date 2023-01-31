@@ -9,6 +9,7 @@ namespace Application.Features.Commands.Cars.Create
         public int BrandId { get; set; }
         public int BodyTypeId { get; set; }
         public int TransmissionId { get; set; }
+        public int CarModelId { get; set; }
         public int Year { get; set; }
         public int Mileage { get; set; }
         public int SeatCount { get; set; }

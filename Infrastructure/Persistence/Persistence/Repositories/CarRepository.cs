@@ -16,7 +16,13 @@ namespace Persistence.Repositories
         {
         }
 
-        public IQueryable<Car> SpecsIncludedTable => Table.Include(c => c.BodyType).Include(c => c.Brand).Include(c => c.Transmission);
+        public IQueryable<Car> SpecsIncludedTable => Table.Include(c => c.BodyType).Include(c => c.Brand).Include(c => c.Transmission).Include(c => c.CarModel);
+
+        public async Task<ICollection<Car>> GetAllWithSpecsIncludedAsync()
+        {
+            return await SpecsIncludedTable.ToListAsync();
+        }
+
         public async Task<ICollection<Car>> GetAvailableCarsAsync()
         {
             var availableCars = await SpecsIncludedTable.Where(c => c.State == CarState.Available).ToListAsync();

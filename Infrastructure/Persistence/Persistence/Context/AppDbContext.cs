@@ -1,4 +1,5 @@
-﻿using Domain.Entites.Base;
+﻿using Domain.Entites;
+using Domain.Entites.Base;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Configuration;
@@ -33,6 +34,7 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<Rental> Rentals { get; set; }
 
     public virtual DbSet<Transmission> Transmissions { get; set; }
+    public virtual DbSet<CarModel> CarModels { get; set; }
 
 
 
@@ -67,7 +69,11 @@ public partial class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
+        modelBuilder.Entity<CarModel>(entity =>
+        {
+            entity.HasIndex(e => e.BrandId, "IX_CarModels_BrandId");
+            entity.HasOne(d => d.Brand).WithMany(p => p.CarModels).HasForeignKey(p => p.BrandId);
+        });
 
         modelBuilder.Entity<Car>(entity =>
         {
@@ -75,10 +81,12 @@ public partial class AppDbContext : DbContext
             entity.HasIndex(e => e.BrandId, "IX_Cars_BrandId");
             entity.HasIndex(e => e.CarInventoryId, "IX_Cars_CarInventoryId");
             entity.HasIndex(e => e.TransmissionId, "IX_Cars_TransmissionId");
+            entity.HasIndex(e => e.CarModelId, "IX_Cars_CarModelId");
             entity.HasOne(d => d.BodyType).WithMany(p => p.Cars).HasForeignKey(d => d.BodyTypeId);
             entity.HasOne(d => d.Brand).WithMany(p => p.Cars).HasForeignKey(d => d.BrandId);
             entity.HasOne(d => d.CarInventory).WithMany(p => p.Cars).HasForeignKey(d => d.CarInventoryId);
             entity.HasOne(d => d.Transmission).WithMany(p => p.Cars).HasForeignKey(d => d.TransmissionId);
+            entity.HasOne(d => d.CarModel).WithMany(p => p.Cars).HasForeignKey(d => d.CarModelId);
         });
 
         modelBuilder.Entity<CarInventory>(entity =>

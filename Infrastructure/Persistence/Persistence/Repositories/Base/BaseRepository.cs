@@ -22,6 +22,10 @@ namespace Persistence.Repositories.Base
             EntityEntry entry = await Table.AddAsync(entity);
             return entry.State == EntityState.Added;
         }
+        public async Task<ICollection<T>> GetAllAsync()
+        {
+            return await Table.ToListAsync();
+        }
 
         public bool Delete(T entity)
         {
@@ -39,13 +43,6 @@ namespace Persistence.Repositories.Base
             }
             return false;
         }
-
-        //leaky
-        public IQueryable<T> GetAll()
-        {
-            return Table.AsQueryable();
-        }
-
         public async Task<T> GetByIdAsync(int id)
         {
             var data = await Table.FindAsync(id);
@@ -84,5 +81,7 @@ namespace Persistence.Repositories.Base
 
             return entry.State == EntityState.Modified;
         }
+
+
     }
 }

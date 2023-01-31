@@ -11,6 +11,7 @@ namespace SharedFramework.Filters
                 var errors = context.ModelState.Where(x => x.Value.Errors.Any()).
                     ToDictionary(e => e.Key, x => x.Value.Errors.
                     Select(e => e.ErrorMessage)).ToArray();
+                //todo --> finish - create customObjectResult ??
             }
         }
     }

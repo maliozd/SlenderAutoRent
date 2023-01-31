@@ -2,7 +2,6 @@
 using Application.Repositories;
 using AutoMapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Cars.Queries.GetAllCars
 {
@@ -19,8 +18,8 @@ namespace Application.Features.Cars.Queries.GetAllCars
 
         public async Task<ICollection<CarDetailDto>> Handle(GetAllCarsQueryRequest request, CancellationToken cancellationToken)
         {
-            var query = _carRepository.GetAll().Include(c => c.BodyType).Include(c => c.Transmission).Include(c => c.Brand);
-            var responseData = _mapper.Map<List<CarDetailDto>>(await query.ToListAsync());
+            var repositoryData = await _carRepository.GetAllWithSpecsIncludedAsync();
+            var responseData = _mapper.Map<List<CarDetailDto>>(repositoryData);
             return responseData;
         }
     }
