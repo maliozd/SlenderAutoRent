@@ -43,16 +43,8 @@ namespace Application.Features.Cars.Validators
                 NotNull().
                 WithMessage("Horse power can't be empty");
 
-            var colorConditions = new[]
-            {
-                "yellow","green","black","gray","white","purple" ,"red","blue","orange", "brown","pink","silver"
-            };
-
             RuleFor(c => c.Color).NotEmpty().
-                NotNull().WithMessage("Color can't be empty").
-                Must(x => colorConditions.Contains(x.ToLower())).
-                WithMessage("Enter must be color.");
-
+                NotNull().WithMessage("Color can't be empty");
         }
     }
 }

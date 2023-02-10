@@ -2,10 +2,12 @@
 using Application.Features.Cars.Queries.GetAllCars;
 using Application.Features.Cars.Queries.GetAvailableCars;
 using Application.Features.Cars.Queries.GetCarById;
+using Application.Features.Cars.Queries.GetCarsByBrand;
 using Application.Features.Cars.Queries.GetCarsPaged;
 using Application.Features.Commands.Cars.Create;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using SharedFramework.Dtos.Request;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -41,6 +43,27 @@ namespace API.Controllers
             var response = await _mediator.Send(request);
             return Ok(response);
         }
+
+
+
+        //toDo --> figure out how you use dynamicFilter
+
+        //[HttpPost("GetListDynamic")]
+        //public async Task<IActionResult> GetListDynamic([FromQuery] PaginationRequest paginationRequest, [FromBody] Dynamic? dynamic = null)
+        //{
+        //    GetCarsByDynamicQueryRequest request = new()
+        //    {
+        //        Dynamic = dynamic,
+        //        PaginationRequest = paginationRequest
+        //    };
+        //    var response = await _mediator.Send(request);
+        //    return Ok(response);
+        //}
+
+
+
+
+
         [HttpGet("[action]")]
         public async Task<IActionResult> GetAvailableCars([FromRoute] GetAvailableCarsQueryRequest request)
         {
@@ -58,6 +81,18 @@ namespace API.Controllers
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateCarCommandRequest request)
         {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpGet("[action]{brandId}")]
+        public async Task<IActionResult> GetCarsPagedByBrand([FromRoute] int brandId, [FromQuery] PaginationRequest paginationRequest)
+        {
+            GetCarsPagedByBrandQueryRequest request = new()
+            {
+                BrandId = brandId,
+                Pagination = paginationRequest
+            };
             var response = await _mediator.Send(request);
             return Ok(response);
         }

@@ -11,19 +11,19 @@ namespace Application.Features.Cars.Mapping
     {
         public CarMappingProfile()
         {
-            CreateMap<CreateCarCommandRequest, Car>();
             CreateMap<CarState, string>().ConvertUsing(state => state.ToString());
+
+            CreateMap<CreateCarCommandRequest, Car>();
+
 
             CreateMap<Car, CarDetailDto>().
                 ForMember(c => c.Brand, m => m.MapFrom(c => c.Brand.Name != null ? c.Brand.Name : "")).
                 ForMember(c => c.BodyType, m => m.MapFrom(c => c.BodyType.Name != null ?
-                c.BodyType.Name : ""
-                )).
+                c.BodyType.Name : "")).
                 ForMember(c => c.Transmission, m => m.MapFrom(c => c.Transmission.Type != null ? c.Transmission.Type : "")).
-                ForMember(c => c.CarModel, m => m.MapFrom(c => c.CarModel.Name != null ? c.CarModel.Name : ""));
+                ForMember(c => c.CarModel, m => m.MapFrom(c => c.CarModel.Name != null ? c.CarModel.Name : "")).
+                ForMember(c => c.Color, m => m.MapFrom(c => c.Color.Name != null ? c.Color.Name : ""));
 
-            CreateMap<UpdateCarCommandRequest, Car>().
-                ForMember(c => c.State, m => m.MapFrom(c => (CarState)c.State));
 
             CreateMap<Car, UpdatedCarDto>().
                 ForMember(c => c.Brand, m => m.MapFrom(c => c.Brand.Name != null ? c.Brand.Name : "")).
@@ -31,10 +31,14 @@ namespace Application.Features.Cars.Mapping
                 c.BodyType.Name : ""
                 )).
                 ForMember(c => c.Transmission, m => m.MapFrom(c => c.Transmission.Type != null ? c.Transmission.Type : "")).
-                ForMember(c => c.CarModel, m => m.MapFrom(c => c.CarModel.Name != null ? c.CarModel.Name : ""));
+                ForMember(c => c.CarModel, m => m.MapFrom(c => c.CarModel.Name != null ? c.CarModel.Name : "")).
+            ForMember(c => c.Color, m => m.MapFrom(c => c.Color.Name != null ? c.Color.Name : ""));
 
 
+            CreateMap<UpdateCarCommandRequest, Car>().
+                ForMember(c => c.State, m => m.MapFrom(c => (CarState)c.State));
 
         }
     }
+
 }

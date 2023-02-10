@@ -16,7 +16,7 @@ namespace Persistence.Repositories
         {
         }
 
-        public IQueryable<Car> SpecsIncludedTable => Table.Include(c => c.BodyType).Include(c => c.Brand).Include(c => c.Transmission).Include(c => c.CarModel);
+        public IQueryable<Car> SpecsIncludedTable => Table.Include(c => c.BodyType).Include(c => c.Brand).Include(c => c.Transmission).Include(c => c.CarModel).Include(c => c.Color);
 
         public async Task<ICollection<Car>> GetAllWithSpecsIncludedAsync()
         {
@@ -32,12 +32,17 @@ namespace Persistence.Repositories
         {
             return await SpecsIncludedTable.FirstOrDefaultAsync(x => x.Id == id);
         }
+        public PaginationQueryResponse<ICollection<Car>> GetCarsPagedByBrand(int brandId, PaginationRequest request)
+        {
+            var totalCarCount = Table.Count();
+            var cars = SpecsIncludedTable.Where(x => x.BrandId == brandId).ToPagedList(request);
+            return new(cars, totalCarCount, request);
+        }
         public PaginationQueryResponse<ICollection<Car>> GetPaged(PaginationRequest request)
         {
             var cars = SpecsIncludedTable.ToPagedList(request);
-            int totalCars = Table.Count();
-            return new(cars, totalCars, request);
 
+            return new(cars, cars.Count, request);
         }
     }
 }

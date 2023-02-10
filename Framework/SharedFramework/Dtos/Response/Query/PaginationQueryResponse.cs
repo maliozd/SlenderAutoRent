@@ -6,7 +6,7 @@ namespace SharedFramework.Dtos.Response.QueryResponse
     {
         public PaginationQueryResponse(TKey data, int total, PaginationRequest request)
         {
-            this.Data = data;
+            Data = data;
             Meta = new(request.Page, total, request.PerPage);
         }
 
@@ -29,7 +29,6 @@ namespace SharedFramework.Dtos.Response.QueryResponse
         public int PerPage { get; set; } = 10;
         public int CurrentPage { get; set; } = 1;
         public int LastPage { get; set; }
-
         public int OffsetFrom => (CurrentPage - 1) * PerPage + 1;
         public int OffsetTo => Math.Min(CurrentPage * PerPage, Total);
     }

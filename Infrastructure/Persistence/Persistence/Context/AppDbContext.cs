@@ -18,6 +18,7 @@ public partial class AppDbContext : DbContext
     }
 
     public virtual DbSet<BodyType> BodyTypes { get; set; }
+    public virtual DbSet<Color> Colors { get; set; }
 
     public virtual DbSet<Brand> Brands { get; set; }
 
@@ -36,8 +37,6 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<Transmission> Transmissions { get; set; }
     public virtual DbSet<CarModel> CarModels { get; set; }
 
-
-
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         var entities = ChangeTracker.Entries<BaseEntity>();
@@ -48,7 +47,6 @@ public partial class AppDbContext : DbContext
             {
                 case EntityState.Added:
                     break;
-
             }
         }
         return base.SaveChangesAsync(cancellationToken);
@@ -72,6 +70,7 @@ public partial class AppDbContext : DbContext
         modelBuilder.Entity<CarModel>(entity =>
         {
             entity.HasIndex(e => e.BrandId, "IX_CarModels_BrandId");
+
             entity.HasOne(d => d.Brand).WithMany(p => p.CarModels).HasForeignKey(p => p.BrandId);
         });
 
@@ -82,8 +81,11 @@ public partial class AppDbContext : DbContext
             entity.HasIndex(e => e.CarInventoryId, "IX_Cars_CarInventoryId");
             entity.HasIndex(e => e.TransmissionId, "IX_Cars_TransmissionId");
             entity.HasIndex(e => e.CarModelId, "IX_Cars_CarModelId");
+            entity.HasIndex(e => e.ColorId, "IX_Cars_ColorId");
+
             entity.HasOne(d => d.BodyType).WithMany(p => p.Cars).HasForeignKey(d => d.BodyTypeId);
             entity.HasOne(d => d.Brand).WithMany(p => p.Cars).HasForeignKey(d => d.BrandId);
+            entity.HasOne(d => d.Color).WithMany(p => p.Cars).HasForeignKey(d => d.ColorId);
             entity.HasOne(d => d.CarInventory).WithMany(p => p.Cars).HasForeignKey(d => d.CarInventoryId);
             entity.HasOne(d => d.Transmission).WithMany(p => p.Cars).HasForeignKey(d => d.TransmissionId);
             entity.HasOne(d => d.CarModel).WithMany(p => p.Cars).HasForeignKey(d => d.CarModelId);
@@ -100,12 +102,9 @@ public partial class AppDbContext : DbContext
         modelBuilder.Entity<Rental>(entity =>
         {
             entity.HasIndex(e => e.CarId, "IX_Rentals_CarId");
-
             entity.HasIndex(e => e.CustomerId, "IX_Rentals_CustomerId");
 
-
             entity.HasOne(d => d.Car).WithMany(p => p.Rentals).HasForeignKey(d => d.CarId);
-
             entity.HasOne(d => d.Customer).WithMany(p => p.Rentals).HasForeignKey(d => d.CustomerId);
         });
 
