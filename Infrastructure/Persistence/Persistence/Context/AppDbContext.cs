@@ -1,5 +1,6 @@
 ﻿using Domain.Entites;
 using Domain.Entites.Base;
+using Domain.Entites.Identity;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Configuration;
@@ -27,6 +28,7 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<CarInventory> CarInventories { get; set; }
 
     public virtual DbSet<Customer> Customers { get; set; }
+    public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<Location> Locations { get; set; }
 

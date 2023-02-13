@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="Features\Brands\Commands\" />
     <Folder Include="Features\Brands\Queries\" />
+    <Folder Include="Features\Auth\" />
     <Folder Include="Repositories\Base\" />
   </ItemGroup>
 

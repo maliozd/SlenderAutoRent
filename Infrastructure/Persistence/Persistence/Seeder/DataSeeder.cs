@@ -11,37 +11,37 @@ namespace Persistence.Seeder
         {
             var options = serviceProvider.GetRequiredService<DbContextOptions<AppDbContext>>();
             var context = new AppDbContext(options);
-            SeedCustomers(context);
+            //SeedCustomers(context);
             SeedLocations(context);
             //SeedRentals(context);
             //SeedCarInventories(context);
         }
-        public static void SeedCustomers(AppDbContext context)
-        {
-            if (!context.Customers.Any())
-            {
-                context.Customers.AddRange(new List<Customer>
-                {
-                    new()
-                    {
-                        Id = 1,
-                        Address = "İstanbul",
-                        Email = "ahmetgunduz@gmail.com",
-                        Name = "Ahmet Gündüz",
-                        PhoneNumber = "1234567890",
-                        RegistrationDate = DateTime.Now
-                    },
-                    new() {
-                        Id = 2,
-                        Address = "Ankara",
-                        Email = "ayselisik@gmail.com",
-                        Name = "Aysel Işık",
-                        PhoneNumber = "12325547890",
-                        RegistrationDate = DateTime.Now
-                    }
-                });
-            }
-        }
+        //public static void SeedCustomers(AppDbContext context)
+        //{
+        //    if (!context.Customers.Any())
+        //    {
+        //        context.Customers.AddRange(new List<Customer>
+        //        {
+        //            new()
+        //            {
+        //                Id = 1,
+        //                Address = "İstanbul",
+        //                Email = "ahmetgunduz@gmail.com",
+        //                Name = "Ahmet Gündüz",
+        //                PhoneNumber = "1234567890",
+        //                RegistrationDate = DateTime.Now
+        //            },
+        //            new() {
+        //                Id = 2,
+        //                Address = "Ankara",
+        //                Email = "ayselisik@gmail.com",
+        //                Name = "Aysel Işık",
+        //                PhoneNumber = "12325547890",
+        //                RegistrationDate = DateTime.Now
+        //            }
+        //        });
+        //    }
+        //}
         public static void SeedLocations(AppDbContext context)
         {
             if (!context.Locations.Any())
