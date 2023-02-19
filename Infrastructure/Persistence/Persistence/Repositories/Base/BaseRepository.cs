@@ -2,9 +2,7 @@
 using Domain.Entites.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore.Query;
 using Persistence.Context;
-using SharedFramework.Dtos.Dynamic;
 using System.Linq.Expressions;
 
 namespace Persistence.Repositories.Base
@@ -84,12 +82,12 @@ namespace Persistence.Repositories.Base
             return entry.State == EntityState.Modified;
         }
 
-        public async Task<ICollection<T>> GetListByDynamicAsync(Dynamic dynamic, Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null)
-        {
-            IQueryable<T> queryable = Table.AsQueryable().ToDynamic(dynamic);
-            if (include != null)
-                queryable = include(queryable);
-            return await queryable.ToListAsync();
-        }
+        //public async Task<ICollection<T>> GetListByDynamicAsync(Dynamic dynamic, Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null)
+        //{
+        //    IQueryable<T> queryable = Table.AsQueryable().ToDynamic(dynamic);
+        //    if (include != null)
+        //        queryable = include(queryable);
+        //    return await queryable.ToListAsync();
+        //}
     }
 }

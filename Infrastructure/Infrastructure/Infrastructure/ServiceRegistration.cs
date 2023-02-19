@@ -1,4 +1,4 @@
-﻿using Application.Abstractions.JWToken;
+﻿using Application.Services.JWToken;
 using Infrastructure.Token;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Features.Auth.Commands.Register;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
@@ -6,9 +8,18 @@ namespace API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        public async Task<IActionResult> Register()
+        readonly IMediator _mediator;
+
+        public AuthController(IMediator mediator)
         {
-            return Ok();
+            _mediator = mediator;
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Register(RegisterCommandRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
         }
     }
 }

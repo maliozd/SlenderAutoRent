@@ -1,4 +1,4 @@
-﻿using Application.Abstractions.JWToken;
+﻿using Application.Services.JWToken;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

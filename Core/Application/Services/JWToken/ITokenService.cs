@@ -1,7 +1,7 @@
 ﻿using Application.Dtos.AccessToken;
 using Domain.Entites.Identity;
 
-namespace Application.Abstractions.JWToken
+namespace Application.Services.JWToken
 {
     public interface ITokenService
     {

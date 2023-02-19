@@ -1,7 +1,5 @@
 ﻿using Domain.Entites.Base;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
-using SharedFramework.Dtos.Dynamic;
 using System.Linq.Expressions;
 
 namespace Application.Repositories.Base
@@ -9,7 +7,7 @@ namespace Application.Repositories.Base
     public interface IRepository<T> where T : BaseEntity
     {
         DbSet<T> Table { get; }
-        Task<ICollection<T>> GetListByDynamicAsync(Dynamic dynamic, Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null); // nasıl kullanılacağını bul
+
         Task<ICollection<T>> GetMultipleByFilter(Expression<Func<T, bool>> expression);
         Task<T> GetOneByFilter(Expression<Func<T, bool>> expression);
         Task<ICollection<T>> GetAllAsync();

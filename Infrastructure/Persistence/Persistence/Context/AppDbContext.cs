@@ -20,22 +20,14 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<BodyType> BodyTypes { get; set; }
     public virtual DbSet<Color> Colors { get; set; }
-
     public virtual DbSet<Brand> Brands { get; set; }
-
     public virtual DbSet<Car> Cars { get; set; }
-
     public virtual DbSet<CarInventory> CarInventories { get; set; }
-
     public virtual DbSet<Customer> Customers { get; set; }
     public virtual DbSet<User> Users { get; set; }
-
     public virtual DbSet<Location> Locations { get; set; }
-
     public virtual DbSet<Payment> Payments { get; set; }
-
     public virtual DbSet<Rental> Rentals { get; set; }
-
     public virtual DbSet<Transmission> Transmissions { get; set; }
     public virtual DbSet<CarModel> CarModels { get; set; }
 

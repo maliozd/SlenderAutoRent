@@ -21,6 +21,7 @@ namespace Persistence
             services.AddScoped<IPaymentRepository, PaymentRepository>();
             services.AddScoped<ICarInventoryRepository, CarInventoryRepository>();
             services.AddScoped<ILocationRepository, LocationRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             DataSeeder.Seed(services.BuildServiceProvider());
         }
