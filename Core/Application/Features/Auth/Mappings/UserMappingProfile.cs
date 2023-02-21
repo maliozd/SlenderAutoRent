@@ -8,7 +8,7 @@ namespace Application.Features.Auth.Mappings
     {
         public UserMappingProfile()
         {
-            CreateMap<RegisterCommandRequest, User>();
+            CreateMap<RegisterCommandRequest, AppUser>();
 
         }
     }

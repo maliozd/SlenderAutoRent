@@ -6,6 +6,7 @@ using Application.Features.Cars.Queries.GetCarsByBrand;
 using Application.Features.Cars.Queries.GetCarsPaged;
 using Application.Features.Commands.Cars.Create;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SharedFramework.Dtos.Request;
 
@@ -24,9 +25,12 @@ namespace API.Controllers
             _mediator = mediator;
         }
         [HttpGet]
+        [Authorize(AuthenticationSchemes = "User")]
+
         public async Task<IActionResult> Get([FromQuery] GetAllCarsQueryRequest request)
         {
             var response = await _mediator.Send(request);
+            var user = Request.HttpContext.User.Identity.Name;
             return Ok(response);
         }
 

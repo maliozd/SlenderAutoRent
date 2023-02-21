@@ -5,7 +5,7 @@ namespace Application.Services.JWToken
 {
     public interface ITokenService
     {
-        Token CreateAccessToken(int expirationMinute, User user);
+        Token CreateAccessToken(int expirationMinute, AppUser user);
         string CreateRefreshToken();
     }
 }

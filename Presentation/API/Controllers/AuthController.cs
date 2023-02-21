@@ -1,4 +1,5 @@
-﻿using Application.Features.Auth.Commands.Register;
+﻿using Application.Features.Auth.Commands.Login;
+using Application.Features.Auth.Commands.Register;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,13 @@ namespace API.Controllers
 
         [HttpPost("[action]")]
         public async Task<IActionResult> Register(RegisterCommandRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Login(LoginCommandRequest request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);

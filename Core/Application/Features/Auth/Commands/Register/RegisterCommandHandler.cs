@@ -1,43 +1,34 @@
-﻿using Application.Repositories;
-using AutoMapper;
+﻿using Application.Features.Auth.Dtos;
 using Domain.Entites.Identity;
 using MediatR;
-using SharedFramework.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace Application.Features.Auth.Commands.Register
 {
-    public class RegisterCommandHandler : IRequestHandler<RegisterCommandRequest, RegisteredCommandResponse>
+    public class RegisterCommandHandler : IRequestHandler<RegisterCommandRequest, RegisterCommandResponse>
     {
-        readonly IUserRepository _userRepository;
+        readonly UserManager<AppUser> _userManager;
 
-        public RegisterCommandHandler(IUserRepository userRepository, IMapper mapper)
+        public RegisterCommandHandler(UserManager<AppUser> userManager)
         {
-            _userRepository = userRepository;
+            _userManager = userManager;
         }
 
-        public async Task<RegisteredCommandResponse> Handle(RegisterCommandRequest request, CancellationToken cancellationToken)
+        public async Task<RegisterCommandResponse> Handle(RegisterCommandRequest request, CancellationToken cancellationToken)
         {
-            byte[] passwordHash, passwordSalt;
-            HashHelper.CreatePasswordHash(request.Password, out passwordHash, out passwordSalt);
-            User user = new()
+            AppUser user = new()
             {
                 Name = request.Name,
                 Surname = request.Surname,
-                Username = request.Username,
+                UserName = request.Username,
                 PhoneNumber = request.PhoneNumber,
                 Address = request.Address,
                 Email = request.Email,
-                PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt,
                 RegistrationDate = DateTime.UtcNow
             };
-            await _userRepository.AddAsync(user);
-            var affectedRows = await _userRepository.SaveAsync();
-            if (affectedRows > 0)
-            {
-                return new() { Success = true };
-            }
-            return new() { Success = false };
+            IdentityResult result = await _userManager.CreateAsync(user, request.Password);
+            return new() { Success = result.Succeeded == true ? true : false };
+
         }
     }
 }

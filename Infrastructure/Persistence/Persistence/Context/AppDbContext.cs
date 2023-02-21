@@ -2,12 +2,13 @@
 using Domain.Entites.Base;
 using Domain.Entites.Identity;
 using Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Configuration;
 
 namespace Persistence.Context;
 
-public partial class AppDbContext : DbContext
+public partial class AppDbContext : IdentityDbContext<AppUser, AppRole, int>
 {
     public AppDbContext()
     {
@@ -24,7 +25,6 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<Car> Cars { get; set; }
     public virtual DbSet<CarInventory> CarInventories { get; set; }
     public virtual DbSet<Customer> Customers { get; set; }
-    public virtual DbSet<User> Users { get; set; }
     public virtual DbSet<Location> Locations { get; set; }
     public virtual DbSet<Payment> Payments { get; set; }
     public virtual DbSet<Rental> Rentals { get; set; }
@@ -101,11 +101,7 @@ public partial class AppDbContext : DbContext
             entity.HasOne(d => d.Car).WithMany(p => p.Rentals).HasForeignKey(d => d.CarId);
             entity.HasOne(d => d.Customer).WithMany(p => p.Rentals).HasForeignKey(d => d.CustomerId);
         });
-
-
-
-        OnModelCreatingPartial(modelBuilder);
+        base.OnModelCreating(modelBuilder);
     }
 
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

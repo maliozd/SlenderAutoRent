@@ -1,3 +1,4 @@
+using API;
 using API.LoggerConfigurationHandler;
 using Application;
 using Infrastructure;
@@ -10,16 +11,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddInfrastructureServices();
+builder.Services.AddAPIRegistration(builder.Configuration);
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Host.UseSerilog(LoggerConfigurationHandler.GetConfiguratedLogger());
 builder.Services.AddHttpLoggingExtension();
+builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.WithOrigins("http://localhost:4200", "https://localhost:4200").AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
+
+
 
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -31,6 +34,8 @@ app.UseCors();
 app.UseHttpLogging();
 app.UseHttpsRedirection();
 app.UseSerilogRequestLogging();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

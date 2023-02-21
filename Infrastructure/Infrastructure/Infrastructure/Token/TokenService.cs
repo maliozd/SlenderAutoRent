@@ -17,7 +17,7 @@ namespace Infrastructure.Token
             _configuration = configuration;
         }
 
-        public Application.Dtos.AccessToken.Token CreateAccessToken(int expirationMinute, global::Domain.Entites.Identity.User user)
+        public Application.Dtos.AccessToken.Token CreateAccessToken(int expirationMinute, global::Domain.Entites.Identity.AppUser user)
         {
             Application.Dtos.AccessToken.Token token = new()
             {

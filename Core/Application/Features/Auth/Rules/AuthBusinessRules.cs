@@ -1,43 +1,66 @@
-﻿using Application.Repositories;
-using Application.Rules;
+﻿using Application.Rules;
+using Domain.Entites.Identity;
+using Microsoft.AspNetCore.Identity;
 using System.Text.RegularExpressions;
 
 namespace Application.Features.Auth.Rules
 {
     public class AuthBusinessRules : BaseRules
     {
-        readonly IUserRepository _userRepository;
+        readonly UserManager<AppUser> _userManager;
 
-        public AuthBusinessRules(IUserRepository repository)
+        public AuthBusinessRules(UserManager<AppUser> userManager)
         {
-            _userRepository = repository;
+            _userManager = userManager;
         }
         /// <summary>
-        /// if username already exist in db for another user : 
+        /// if username already taken for another user : 
         /// return true
-        /// 
+        /// --------
         /// else :
         /// return false
+        /// 
         /// </summary>
-        /// <param name="username"></param>
+        /// <param name="username">
+        /// input username
+        /// </param>
         /// <returns>bool</returns>
         public bool IsUsernameExist(string username)
         {
-            if (_userRepository.Table.Any(t => t.Username == username))
+            if (_userManager.Users.Any(t => t.UserName == username))
             {
                 return true;
             }
             return false;
         }
-
+        /// <summary>
+        /// if email is already in use : 
+        /// return true 
+        /// -------
+        /// else : 
+        /// return false
+        /// input email
+        /// </summary>
+        /// 
+        /// <param name="email"></param>
+        /// <returns></returns>
         public bool IsEmailExist(string email)
         {
-            if (_userRepository.Table.Any(t => t.Email == email))
+            if (_userManager.Users.Any(t => t.Email == email))
             {
                 return true;
             }
             return false;
         }
+        /// <summary>
+        /// password must contain one upperCase at least.
+        /// ! can be more !
+        /// </summary>
+        /// 
+        /// <param name="password">
+        /// input password
+        /// </param>
+        /// <returns></returns>
         public bool PasswordMustContainSpecialCharacters(string password)
         {
             var lowercase = new Regex("[a-z]+");
@@ -47,5 +70,6 @@ namespace Application.Features.Auth.Rules
 
             return lowercase.IsMatch(password) && uppercase.IsMatch(password);
         }
+
     }
 }

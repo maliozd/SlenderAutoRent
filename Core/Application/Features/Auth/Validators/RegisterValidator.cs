@@ -6,10 +6,8 @@ namespace Application.Features.Auth.Validators
 {
     public class RegisterValidator : AbstractValidator<RegisterCommandRequest>
     {
-
         public RegisterValidator(AuthBusinessRules authBusinessRules)
         {
-
             RuleFor(x => x.Username).
                 Must(x => authBusinessRules.IsUsernameExist(x) == false).
                 WithMessage("This username was taken! Choose another one.").

@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using Application.Features.Auth.Dtos;
+using MediatR;
 
 namespace Application.Features.Auth.Commands.Register
 {
-    public class RegisterCommandRequest : IRequest<RegisteredCommandResponse>
+    public class RegisterCommandRequest : IRequest<RegisterCommandResponse>
     {
         public string Username { get; set; } = null!;
         public string Name { get; set; } = null!;
